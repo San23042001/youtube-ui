@@ -1,0 +1,79 @@
+/* ─── YouTube Design Tokens ─────────────────────────────────────── */
+:root {
+  /* Palette */
+  --yt-bg:           #0f0f0f;
+  --yt-surface:      #212121;
+  --yt-surface-2:    #272727;
+  --yt-surface-3:    #2a2a2a;
+  --yt-border:       #3d3d3d;
+  --yt-text:         #f1f1f1;
+  --yt-text-muted:   #aaaaaa;
+  --yt-text-dim:     #717171;
+  --yt-red:          #ff0000;
+  --yt-red-hover:    #cc0000;
+  --yt-blue:         #3ea6ff;
+  --yt-white:        #ffffff;
+
+  /* Typography */
+  --font-sans: "YouTube Sans", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing scale */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--yt-bg);
+  color: var(--yt-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  background: transparent;
+  color: inherit;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar            { width: 8px; }
+::-webkit-scrollbar-track      { background: var(--yt-surface); }
+::-webkit-scrollbar-thumb      { background: #555; border-radius: var(--radius-sm); }
+::-webkit-scrollbar-thumb:hover{ background: #777; }
+
+/* ─── Animations ─────────────────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.anim-fade    { animation: fadeSlideUp 0.35s ease both; }
+.anim-pop     { animation: popIn 0.2s ease both; }
