@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 
-/**
- * Expandable video description box.
- *
- * @param {string}   text
- * @param {string}   views
- * @param {string}   publishedAt
- * @param {string[]} tags
- */
+const COLLAPSED_HEIGHT = 68;
+
 export default function Description({ text, views, publishedAt, tags = [] }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -19,49 +13,48 @@ export default function Description({ text, views, publishedAt, tags = [] }) {
       aria-expanded={expanded}
       aria-label={expanded ? undefined : "Expand description"}
     >
-      {/* Views + date + tags */}
+      {/* Views · date · hashtags */}
       <div style={styles.meta}>
-        <span style={styles.metaText}>{views} views</span>
-        <span style={styles.metaText}>{publishedAt}</span>
+        <span style={styles.metaBold}>{views} views</span>
+        <span style={styles.metaBold}>{publishedAt}</span>
         {tags.map((tag) => (
           <span key={tag} style={styles.tag}>{tag}</span>
         ))}
       </div>
 
-      {/* Description body */}
-      <div
-        style={{
-          ...styles.body,
-          maxHeight: expanded ? "2000px" : "76px",
-          overflow: "hidden",
-          transition: "max-height 0.4s ease",
-        }}
-      >
-        {text.split("\n").map((line, i) => (
-          <React.Fragment key={i}>
-            {line}
-            <br />
-          </React.Fragment>
-        ))}
+      <div style={{ position: "relative" }}>
+        <div
+          style={{
+            ...styles.body,
+            maxHeight: expanded ? "2000px" : `${COLLAPSED_HEIGHT}px`,
+            overflow: "hidden",
+            transition: "max-height 0.35s ease",
+          }}
+        >
+          {text.split("\n").map((line, i) => (
+            <React.Fragment key={i}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </div>
+
+        
+        {!expanded && (
+          <div
+            style={styles.fadeOverlay}
+            aria-hidden="true"
+          />
+        )}
       </div>
 
-      {/* Toggle buttons */}
-      {!expanded && (
-        <button
-          style={styles.toggleBtn}
-          onClick={(e) => { e.stopPropagation(); setExpanded(true); }}
-        >
-          ...more
-        </button>
-      )}
-      {expanded && (
-        <button
-          style={styles.toggleBtn}
-          onClick={() => setExpanded(false)}
-        >
-          Show less
-        </button>
-      )}
+     
+      <button
+        style={styles.toggleBtn}
+        onClick={(e) => { e.stopPropagation(); setExpanded((v) => !v); }}
+      >
+        {expanded ? "Show less" : "...more"}
+      </button>
     </div>
   );
 }
@@ -70,17 +63,17 @@ const styles = {
   box: {
     background: "#272727",
     borderRadius: 12,
-    padding: "12px 14px",
-    marginBottom: 24,
+    padding: "12px 16px 14px",
+    marginBottom: 20,
   },
   meta: {
     display: "flex",
     flexWrap: "wrap",
-    gap: 6,
     alignItems: "center",
-    marginBottom: 8,
+    gap: 8,
+    marginBottom: 10,
   },
-  metaText: {
+  metaBold: {
     fontSize: 14,
     fontWeight: 600,
     color: "#f1f1f1",
@@ -98,15 +91,27 @@ const styles = {
     whiteSpace: "pre-wrap",
     wordBreak: "break-word",
   },
+  fadeOverlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 28,
+    background: "linear-gradient(to bottom, transparent, #272727)",
+    pointerEvents: "none",
+  },
   toggleBtn: {
     display: "block",
-    marginTop: 6,
-    background: "transparent",
+    marginTop: 8,
+    background: "none",
     color: "#f1f1f1",
     fontWeight: 700,
     fontSize: 14,
     padding: 0,
-    cursor: "pointer",
     border: "none",
+    outline: "none",
+    cursor: "pointer",
+    WebkitAppearance: "none",
+    appearance: "none",
   },
 };

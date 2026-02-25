@@ -1,16 +1,11 @@
-import React from "react";
+
 import Avatar from "./Avatar";
 import LikeDislikeBar from "./LikeDislikeBar";
 import ActionButton from "./ActionButton";
 import { IconVerified, IconShare, IconDownload, IconMore } from "./Icons";
 import { useLikeDislike, useToggle } from "../hooks";
-import { formatCount,copyToClipboard } from "../utility/Helpers";
+import {copyToClipboard } from "../utility/Helpers";
 
-/**
- * Video title + channel row + action buttons.
- *
- * @param {{ title, views, publishedAt, likes, tags, channel }} video
- */
 export default function VideoInfo({ video }) {
   const { liked, disliked, toggleLike, toggleDislike } = useLikeDislike();
   const [subscribed, toggleSubscribed] = useToggle(false);
@@ -24,12 +19,12 @@ export default function VideoInfo({ video }) {
 
   return (
     <div style={styles.wrapper}>
-      {/* Title */}
+   
       <h1 style={styles.title}>{video.title}</h1>
 
-      {/* Channel row + Actions */}
+
       <div style={styles.metaRow}>
-        {/* Channel info + Subscribe */}
+ 
         <div style={styles.channelGroup}>
           <Avatar initials={video.channel.initials} color="#0066cc" size="lg" />
 
@@ -90,7 +85,7 @@ export default function VideoInfo({ video }) {
 
 const styles = {
   wrapper: {
-    marginBottom: 4,
+    marginBottom: 12,
   },
   title: {
     fontSize: "clamp(16px, 2.2vw, 20px)",
