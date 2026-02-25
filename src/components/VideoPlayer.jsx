@@ -7,7 +7,7 @@ export default function VideoPlayer({ progress = 0.011, currentTime = "0:13", du
       {/* Poster / centre play icon */}
       <div style={styles.poster}>
         <IconPlay size={64} />
-        <p style={styles.label}>Video Player Area</p>
+        <p style={styles.label}>Video Player</p>
       </div>
 
       {/* Progress bar */}
@@ -27,12 +27,12 @@ export default function VideoPlayer({ progress = 0.011, currentTime = "0:13", du
 const styles = {
   wrapper: {
     width: "100%",
-    maxWidth: 896,
-    margin: "0 auto",
     aspectRatio: "16 / 9",
     background: "#1a1a1a",
     display: "flex",
     flexDirection: "column",
+    borderRadius: 8,
+    overflow: "hidden",
   },
   poster: {
     flex: 1,
